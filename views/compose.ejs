@@ -1,0 +1,105 @@
+<%- include("partials/header") -%>
+
+
+
+
+
+<script src="//cdn.ckeditor.com/4.11.4/full/ckeditor.js"></script>
+
+<div class="container">
+  <div class="page-header">
+      <h1>Hadi Bir yazı Yaz!</h1>
+  </div>
+  <!-- novalidate attribute is only in place to disable HTML5 validation -->
+  <form class="form-horizontal simple-validation" action="/compose" method="post">
+
+    <div class="form-group">
+      <label for="blogtitle">Title</label>
+      <input class="form-control" type="text" name="blogtitle" value="" placeholder="Write your Title">
+    </div>
+    <div class="form-group">
+      <label for="postimage">Post Image</label>
+      <input class="form-control" type="text" name="imageURL" value="" placeholder="putanimageURL">
+    </div>
+      
+    <div class="form-group">
+      <label for="postimage">Youtube EMBED Url</label>
+      <input class="form-control" type="url" name="ytURL" value="" placeholder="Youtube URL">
+    </div>
+    <div class="form-group">
+      <label for="tag1">Tag 1</label>
+      <select name="tag1" class="form-control" id="tag1">
+        <option>autocad</option>
+        <option>sketchup</option>
+        <option>photoshop</option>
+        <option>render</option>
+        <option>portfolio</option>
+        <option>Tutorial</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="tag2">Tag 2</label>
+      <select name="tag2" class="form-control" id="tag2">
+        <option>autocad</option>
+        <option>Sketchup</option>
+        <option>Photoshop</option>
+        <option>render</option>
+        <option>portfolio</option>
+        <option>Tutorial</option>
+      </select>
+    </div>
+    <div id="editor" class="form-group">
+      <label for="blogpost">Post</label>
+      <textarea class="form-control form-control-lg" rows="5" cols="30"  type="text" name="blogpost" value="" placeholder="Write your text"></textarea>
+    </div>
+    <script>
+    CKEDITOR.replace("blogpost");
+    </script>
+              
+              <div class="frmBtn">
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Submit</button>
+              </div>
+          </div>
+      </div>
+  </form>
+  <hr />
+ 
+
+
+
+</div>
+  <script> $(function(){
+    $('button.delete').on('click',function(event){
+        var me      = $(this),
+            form    = me.parents('form'),
+            title   = me.data('title') || 'Make this change?';
+        event.preventDefault();
+        openActionDialog({
+            message     : title,
+            parent      : form[0].id
+        });
+    });
+  
+  $('#normal-dialog').on('click',function(event){
+        openDialog({
+            noerror     : true,
+            message     : '<div class="lead text-center">This dialog has a width and height set when created.</div>',
+            width       : window.innerWidth -20,
+            height      : window.innerHeight - 60,
+        });
+    });
+  
+  $('#action-dialog').on('click',function(event){
+        openActionDialog({
+            noerror     : true,
+            message     : 'Are you sure you want to process the callback?',
+          callback : function(m){
+            alert('Something could happen in here.');
+            m.modal('hide');
+          }
+        });
+    });
+});
+
+</script>
+

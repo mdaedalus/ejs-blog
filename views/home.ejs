@@ -1,0 +1,30 @@
+<%- include("partials/header") -%>
+<br>
+<div class="container">
+<div class="row">
+
+  <% posts.forEach(function(posts) { %>
+    <% const url = "/posts/" + posts._id %>
+    <% const tag1Url = "/tags/" + posts.tag1 %>
+    <% const tag2Url = "/tags/" + posts.tag2 %>
+    <% let month = posts.mm %>
+    <% switch(month){case 1:month="Enero";break;case 2:month="Febrero";break;case 3:month="Marzo";break;case 4:month="Abril";break;case 5:month="Mayo";break;case 6:month="Junio";break;case 7:month="Julio";break;case 8:month="Agosto";break;case 9:month="Septiembre";break;case 10:month="Octubre";break;case 11:month="Noviembre";break;case 12:month="Diciembre"} %>
+  
+  <div class="col-sm-3">
+    <div class="card">
+      <img class="card-img-top" width="200" height="200" src="<%=posts.imageURL%>" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><%=  posts.title %></h1>
+          <% if (typeof posts.content == 'undefined' ) { %>
+                    <p> no content</p>
+                <% } else { %></h5>
+        <p class="card-text"><% var noTags = posts.noTags.replace(/&nbsp;|&#39;/g, ' '); %>
+          <p style="text-align: justify;"><%=  noTags.substring(0,40) %> ...</p>
+ <% } %></p>
+        <a href="<%= url %>" class="btn btn-primary">Devam Et</a>
+      </div>
+    </div><br>
+  </div>
+  <%});%>
+</div>
+</div>
